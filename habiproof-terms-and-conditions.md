@@ -1,4 +1,20 @@
-CONDITIONS & PRIVACY POLICY FOR HABIPROOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habiproof - Terms and Conditions & Privacy Policy</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 40px 20px; color: #333; }
+        h1 { color: #0f5132; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; }
+        h2 { color: #146c43; margin-top: 30px; }
+        h3 { color: #198754; }
+        ul { padding-left: 20px; }
+        hr { border: 0; height: 1px; background: #dee2e6; margin: 40px 0; }
+    </style>
+</head>
+<body>
+    CONDITIONS & PRIVACY POLICY FOR HABIPROOF
 
 **Last Updated: July 20, 2026**
 
@@ -57,3 +73,8 @@ We may update our Terms and Privacy Policy from time to time. Any changes will b
 ### 2.5. Contact Us
 
 If you have any questions regarding these terms, you can contact us at: **burakoztirpan@gmail.com**
+</body>
+</html>
+
+
+
