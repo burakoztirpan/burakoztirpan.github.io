@@ -12,13 +12,14 @@
         ul { padding-left: 20px; }
         hr { border: 0; height: 1px; background: #dee2e6; margin: 40px 0; }
         .date { color: #6c757d; font-style: italic; margin-bottom: 20px; }
+        .deletion-box { background-color: #f8f9fa; border-left: 4px solid #198754; padding: 15px; margin: 20px 0; }
         strong { color: #111; }
     </style>
 </head>
 <body>
 
     <h1>TERMS AND CONDITIONS & PRIVACY POLICY FOR HABIPROOF</h1>
-    <p class="date">Last Updated: July 20, 2026</p>
+    <p class="date">Last Updated: July 30, 2026</p>
 
     <p>Welcome to <strong>Habiproof</strong> ("Application", "we", "us", or "our"). By downloading, installing, or using Habiproof, you agree to be bound by these Terms and Conditions and our Privacy Policy outlined below. If you do not agree, please do not use the Application.</p>
 
@@ -32,7 +33,7 @@
     <h3>2. Account Registration and Deletion</h3>
     <ul>
         <li><strong>Account Creation:</strong> To access features, you must authenticate via third-party social logins (Google Sign-In or Sign-In with Apple). You are responsible for maintaining the security of your device and authentication state.</li>
-        <li><strong>Account Deletion:</strong> In compliance with global app store regulations, you have the right to delete your account and all associated structured data at any time. Account deletion requests can be initiated directly within the Application's settings or by contacting us at the email provided below. Upon deletion, your Firestore data records will be permanently erased.</li>
+        <li><strong>Account & Data Deletion:</strong> In compliance with global app store regulations, you have the right to delete your account and all associated structured data at any time. Account deletion requests can be initiated directly within the Application's settings or by contacting us via email. Upon request, your user account and Firestore data records will be permanently erased.</li>
     </ul>
 
     <h3>3. In-App Purchases and Subscriptions (RevenueCat)</h3>
@@ -60,17 +61,18 @@
     <h3>1. Data Collection and Infrastructure (Where Your Data Lives)</h3>
     <p>We collect and process data strictly to provide and optimize the inspection workflow:</p>
     <ul>
-        <li><strong>Structured Inspection Data (Cloud Storage):</strong> Your project data, room lists, checklists, structural findings, and user notes are stored securely using <strong>Google Cloud Firestore</strong>. This data is hosted on secure cloud infrastructure to sync your app state and manage your account.</li>
+        <li><strong>Personal Info & Account Data:</strong> Your email address and unique User IDs are processed securely via Firebase Authentication and RevenueCat for account management, authentication, and subscription tracking.</li>
+        <li><strong>Structured Inspection Data (Cloud Storage):</strong> Your project data, room lists, checklists, structural findings, and user notes are stored securely using <strong>Google Cloud Firestore</strong>.</li>
         <li><strong>Visual Data (Local-Only Storage):</strong> Your privacy regarding visual assets is strictly protected. <strong>All inspection photos and images remain entirely on your local device storage.</strong> We do not host, store, or back up your raw image files on our servers.</li>
-        <li><strong>Ephemeral AI Processing:</strong> When you run a defect or room analysis, the selected images are transmitted ephemerally to the <strong>Google Gemini API</strong> endpoints solely for processing and report generation. Google Gemini does not retain these images permanently for their model training when processed via paid API endpoints.</li>
+        <li><strong>Ephemeral AI Processing:</strong> When you run a defect or room analysis, the selected images are transmitted ephemerally to the <strong>Google Gemini API</strong> endpoints solely for processing and report generation. Google Gemini does not retain these images permanently for model training when processed via paid API endpoints.</li>
     </ul>
 
     <h3>2. Third-Party Data Processors</h3>
     <p>To facilitate authentication, data storage, and billing, we securely share minimal necessary data with the following infrastructure providers:</p>
     <ul>
-        <li><strong>Firebase Authentication:</strong> Handles secure user login and token generation.</li>
+        <li><strong>Firebase Authentication:</strong> Handles secure user login, email authentication, and token generation.</li>
         <li><strong>Cloud Firestore:</strong> Hosts and processes your structured inspection text, metadata, and checklists.</li>
-        <li><strong>RevenueCat:</strong> Tracks and validates your digital receipt tokens, premium features access, and active subscription status.</li>
+        <li><strong>RevenueCat:</strong> Tracks and validates your digital receipt tokens, purchase history, premium features access, and active subscription status.</li>
     </ul>
 
     <h3>3. Device Permissions</h3>
@@ -80,18 +82,23 @@
         <li><strong>Photo Gallery / Storage:</strong> To select existing images for analysis and to export/save generated PDF checklists directly onto your device.</li>
     </ul>
 
-    <h3>4. User Rights (GDPR / KVKK Compliance)</h3>
-    <p>Regardless of your location, you retain the following rights regarding your data:</p>
-    <ul>
-        <li><strong>Right to Access / Portability:</strong> You can view your active structured data within the application interface.</li>
-        <li><strong>Right to Erasure (To Be Forgotten):</strong> You may delete your account and purge your entire Firestore data history at any time via the app settings.</li>
-    </ul>
+    <h3>4. User Rights, Account & Data Deletion Request (GDPR / KVKK / Store Policy)</h3>
+    <p>Regardless of your location, you retain full rights over your personal data:</p>
+    
+    <div class="deletion-box">
+        <h4>How to Request Account & Data Deletion:</h4>
+        <p>You can request full deletion of your Habiproof account and all associated personal data using either of the following methods:</p>
+        <ul>
+            <li><strong>In-App Deletion:</strong> Go to Application Settings > Account > Select <em>"Delete Account"</em> to purge your profile and data instantly.</li>
+            <li><strong>Web / Email Deletion Request:</strong> If you no longer have the app installed, send an email to <strong>burakoztirpan@gmail.com</strong> with the subject line <em>"Account Deletion Request"</em> using the email associated with your Google or Apple Sign-In. Your account and stored data (Firestore records, purchase identifiers) will be deleted within 30 days.</li>
+        </ul>
+    </div>
 
     <h3>5. Children's Privacy</h3>
-    <p>Habiproof is not intended for, marketed to, or designed for individuals under the age of 18. We do not knowingly collect personal data from minors. If we discover that a minor has provided us with personal information, we will delete it immediately.</p>
+    <p>Habiproof is not intended for, marketed to, or designed for individuals under the age of 13. We do not knowingly collect personal data from minors. If we discover that a minor has provided us with personal information, we will delete it immediately.</p>
 
     <h3>6. Contact Us</h3>
-    <p>For data access requests, account deletion support, or legal inquiries, please contact us at: <strong>burakoztirpan@gmail.com</strong></p>
+    <p>For data access requests, privacy concerns, account deletion support, or legal inquiries, please contact us at: <strong>burakoztirpan@gmail.com</strong></p>
 
 </body>
 </html>
