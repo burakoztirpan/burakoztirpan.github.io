@@ -30,9 +30,9 @@
     <h3>1. Description of Service</h3>
     <p>Habiproof is an AI-guided home inspection assistant designed to help users identify property defects, perform room analyses, and generate inspection checklists and PDF summaries.</p>
 
-    <h3>2. Account Registration and Deletion</h3>
+    <h3>2. Account Registration and Guest Access</h3>
     <ul>
-        <li><strong>Account Creation:</strong> To access features, you must authenticate via third-party social logins (Google Sign-In or Sign-In with Apple). You are responsible for maintaining the security of your device and authentication state.</li>
+        <li><strong>Account & Guest Access:</strong> You may use core features as a guest without an account. Signing in via Google or Apple is required to access AI-powered analysis, purchase credits, and sync your data across devices. You are responsible for maintaining the security of your device and authentication state.</li>
         <li><strong>Account & Data Deletion:</strong> In compliance with global app store regulations, you have the right to delete your account and all associated structured data at any time. Account deletion requests can be initiated directly within the Application's settings or by contacting us via email. Upon request, your user account and Firestore data records will be permanently erased.</li>
     </ul>
 
@@ -64,13 +64,13 @@
         <li><strong>Personal Info & Account Data:</strong> Your email address and unique User IDs are processed securely via Firebase Authentication and RevenueCat for account management, authentication, and subscription tracking.</li>
         <li><strong>Structured Inspection Data (Cloud Storage):</strong> Your project data, room lists, checklists, structural findings, and user notes are stored securely using <strong>Google Cloud Firestore</strong>.</li>
         <li><strong>Visual Data (Local-Only Storage):</strong> Your privacy regarding visual assets is strictly protected. <strong>All inspection photos and images remain entirely on your local device storage.</strong> We do not host, store, or back up your raw image files on our servers.</li>
-        <li><strong>Ephemeral AI Processing:</strong> When you run a defect or room analysis, the selected images are transmitted ephemerally to the <strong>Google Gemini API</strong> endpoints solely for processing and report generation. Google Gemini does not retain these images permanently for model training when processed via paid API endpoints.</li>
+        <li><strong>Ephemeral AI Processing:</strong> Images are transmitted to the Google Gemini API solely for analysis and are not stored by our servers after processing. Please refer to Google's Gemini API terms for how Google itself may process this data.</li>
     </ul>
 
     <h3>2. Third-Party Data Processors</h3>
     <p>To facilitate authentication, data storage, and billing, we securely share minimal necessary data with the following infrastructure providers:</p>
     <ul>
-        <li><strong>Firebase Authentication:</strong> Handles secure user login, email authentication, and token generation.</li>
+        <li><strong>Firebase Authentication:</strong> Handles secure user login, OAuth-based authentication, and token generation.</li>
         <li><strong>Cloud Firestore:</strong> Hosts and processes your structured inspection text, metadata, and checklists.</li>
         <li><strong>RevenueCat:</strong> Tracks and validates your digital receipt tokens, purchase history, premium features access, and active subscription status.</li>
     </ul>
@@ -90,8 +90,11 @@
         <p>You can request full deletion of your Habiproof account and all associated personal data using either of the following methods:</p>
         <ul>
             <li><strong>In-App Deletion:</strong> Go to Application Settings > Account > Select <em>"Delete Account"</em> to purge your profile and data instantly.</li>
-            <li><strong>Web / Email Deletion Request:</strong> If you no longer have the app installed, send an email to <strong>burakoztirpan@gmail.com</strong> with the subject line <em>"Account Deletion Request"</em> using the email associated with your Google or Apple Sign-In. Your account and stored data (Firestore records, purchase identifiers) will be deleted within 30 days.</li>
+            <li><strong>Web / Email Deletion Request:</strong> If you no longer have the app installed, send an email to <strong>burakoztirpan@gmail.com</strong> with the subject line <em>"Account Deletion Request"</em> using the email associated with your Google or Apple Sign-In.</li>
         </ul>
+        <p><strong>What gets deleted:</strong> Deleting your account permanently removes your user profile, inspection projects, rooms, checklist items, findings, notes, and saved report metadata from our database (Firestore). Locally stored photos and PDF reports on your device are not affected by this process and can be removed by uninstalling the app.</p>
+        <p><strong>What may be retained:</strong> Purchase and subscription transaction records processed through our payment provider (RevenueCat) may be retained separately from your account data as required for financial record-keeping, fraud prevention, and legal/tax compliance, even after your account is deleted.</p>
+        <p><strong>Timing:</strong> In-app deletion (Application Settings > Account > Delete Account) removes your data immediately. Deletion requests submitted by email are processed within 30 days.</p>
     </div>
 
     <h3>5. Children's Privacy</h3>
