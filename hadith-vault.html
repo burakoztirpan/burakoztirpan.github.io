@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hadith Vault</title>
+<meta name="description" content="Hadith Vault — read Sahih al-Bukhari in English, Arabic, Turkish, Indonesian, and Urdu. No account, no ads, no tracking.">
+<style>
+  :root {
+    --accent: #1f6e57;
+    --accent-light: #2a8a6d;
+    --text: #1c1c1e;
+    --muted: #6b6b70;
+    --bg: #ffffff;
+    --bg-soft: #f6f9f8;
+    --border: #e5e5e7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #14372c 0%, #1f6e57 55%, #2a8a6d 100%);
+    color: #fff;
+    padding: 88px 24px 96px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%),
+      linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%);
+    background-size: 64px 64px;
+    background-position: 0 0, 32px 32px;
+    opacity: 0.5;
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .app-icon {
+    width: 92px;
+    height: 92px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 24px;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .hero p.tagline {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.88);
+    margin: 0 0 32px;
+  }
+  .badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.28);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+
+  /* Sections */
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+  .section h2 {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .section .subhead {
+    text-align: center;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 44px;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .feature {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .feature .icon {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .feature h3 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+  }
+  .feature p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .languages {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .lang-pill {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.92rem;
+  }
+
+  .support {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .support .box {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .support .box a.button {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .support .box a.button:hover {
+    background: var(--accent-light);
+  }
+
+  footer {
+    padding: 40px 24px 56px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  footer .links {
+    margin-bottom: 12px;
+  }
+  footer .links a {
+    color: var(--text);
+    text-decoration: none;
+    margin: 0 12px;
+  }
+  footer .links a:hover {
+    color: var(--accent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #f2f2f3;
+      --muted: #9a9a9f;
+      --bg: #0f1210;
+      --bg-soft: #171a18;
+      --border: #2a2e2c;
+    }
+    .feature, .support .box, .lang-pill {
+      background: var(--bg-soft);
+    }
+    .support .box { background: #141712; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="app-icon">📖</div>
+      <h1>Hadith Vault</h1>
+      <p class="tagline">Read Sahih al-Bukhari daily — favorite hadiths, build a streak, and share what you read. No account. No ads. No tracking.</p>
+      <div class="badges">
+        <span class="badge">5 languages</span>
+        <span class="badge">Free to use</span>
+        <span class="badge">100% offline</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Everything you need to read, daily</h2>
+    <p class="subhead">A focused, distraction-free way to spend a few minutes a day with the hadith collection.</p>
+    <div class="features">
+      <div class="feature">
+        <span class="icon">🌙</span>
+        <h3>Hadith of the Day</h3>
+        <p>A new hadith featured every day, plus a daily reading streak to keep you consistent.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">⭐️</span>
+        <h3>Favorites</h3>
+        <p>Save hadiths you want to revisit, organized by category so it stays usable even with hundreds saved.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">🔔</span>
+        <h3>Daily Reminder</h3>
+        <p>An optional local notification at a time you choose — no server, no tracking involved.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">🖼️</span>
+        <h3>Shareable Cards</h3>
+        <p>Share any hadith as text, or as a designed image card with your choice of 10 backgrounds.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">🔤</span>
+        <h3>Typography Control</h3>
+        <p>Pick the reading font and size that's most comfortable for you, with a live preview.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">🌗</span>
+        <h3>Light &amp; Dark</h3>
+        <p>Matches your system appearance, or set it manually — whichever you prefer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <h2>Available in five languages</h2>
+    <p class="subhead">Every screen is fully translated — not just the hadith text.</p>
+    <div class="languages">
+      <span class="lang-pill">English</span>
+      <span class="lang-pill">العربية</span>
+      <span class="lang-pill">Türkçe</span>
+      <span class="lang-pill">Bahasa Indonesia</span>
+      <span class="lang-pill">اردو</span>
+    </div>
+  </section>
+
+  <section class="support">
+    <div class="section" style="padding-top:64px; padding-bottom:64px;">
+      <div class="box">
+        <h2 style="margin-top:0;">Need help?</h2>
+        <p style="color:var(--muted);">Questions, feedback, or something not working as expected — we're happy to help.</p>
+        <a class="button" href="mailto:burakoztirpan@gmail.com">Contact Support</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="links">
+      <a href="https://burakoztirpan.online/hadith-vault-terms-and-conditions">Terms and Conditions</a>
+      <a href="https://burakoztirpan.online/hadith-valut-privacy-policy">Privacy Policy</a>
+    </div>
+    © 2026 Burak Öztırpan. Hadith Vault.
+  </footer>
+
+</body>
+</html>
