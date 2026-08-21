@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habiproof - AI Property Inspection & PDF Reports</title>
-    <meta name="description" content="Inspect homes, document defects, and generate clear, structured PDF reports in minutes — powered by AI.">
+    <title>Habiproof: AI Property Inspection & PDF Reports</title>
+    <meta name="description" content="Inspect homes, document defects with AI-assisted suggestions, and generate clean, professional PDF reports in minutes. Available now on the App Store.">
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0F766E;
@@ -15,34 +19,60 @@
             --bg: #F2F2F7;
             --surface: #FFFFFF;
             --text: #17211F;
-            --text-secondary: #66736F;
-            --text-muted: #98A29F;
+            --text-secondary: #4B5A56;
+            --text-muted: #7C8A86;
             --border: #E4E8E6;
         }
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
             color: var(--text);
             background-color: var(--surface);
-            line-height: 1.5;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
         }
+        ::selection { background: var(--primary); color: #fff; }
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { max-width: 62ch; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
         .container {
             max-width: 1080px;
             margin: 0 auto;
             padding: 0 24px;
         }
+
+        /* ---- header ---- */
         header {
-            padding: 22px 0;
+            padding: 20px 0;
             border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 700;
+            letter-spacing: -0.2px;
             color: var(--text);
             text-decoration: none;
         }
@@ -51,7 +81,23 @@
             height: 30px;
             border-radius: 7px;
         }
-        .pill {
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--text);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background 0.18s ease;
+        }
+        .header-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+        /* ---- live badge ---- */
+        .live-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -59,75 +105,112 @@
             color: var(--primary-dark);
             font-size: 13px;
             font-weight: 600;
-            padding: 7px 14px;
+            padding: 7px 14px 7px 12px;
             border-radius: 100px;
+            margin-bottom: 22px;
         }
-        .pill .dot {
+        .live-badge .dot {
             width: 7px;
             height: 7px;
             border-radius: 50%;
             background: var(--primary);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.18);
         }
+
+        /* ---- hero ---- */
         .hero {
-            padding: 72px 0 40px;
+            padding: 56px 0 48px;
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 48px;
             align-items: center;
         }
         .hero-copy h1 {
-            font-size: 44px;
-            line-height: 1.12;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin: 20px 0 16px;
+            font-size: 46px;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.9px;
+            margin: 0 0 16px;
         }
+        .hero-copy h1 .accent { color: var(--primary); }
         .hero-copy p.subtitle {
             font-size: 18px;
             color: var(--text-secondary);
-            max-width: 460px;
+            max-width: 46ch;
             margin: 0 0 28px;
         }
-        .hero-image {
+        .hero-actions {
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
         }
-        .hero-image img {
-            width: 100%;
-            max-width: 340px;
-            border-radius: 24px;
-            box-shadow: 0 24px 60px -20px rgba(23, 33, 31, 0.35);
-        }
-        .coming-soon {
+        .android-note {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            font-size: 14px;
-            font-weight: 600;
-            padding: 10px 18px;
+            gap: 7px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .android-note svg { flex-shrink: 0; }
+
+        /* Apple-style download badge — built in CSS/inline SVG (no external
+           asset fetch); mirrors Apple's own badge proportions/typography
+           without reproducing their trademarked artwork. */
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #0A0A0A;
+            color: #fff;
+            padding: 10px 18px 10px 14px;
             border-radius: 12px;
+            text-decoration: none;
+            line-height: 1.15;
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background 0.18s ease;
         }
-        section.features {
-            padding: 56px 0;
+        .store-badge:hover { background: #000; transform: translateY(-2px); }
+        .store-badge svg { flex-shrink: 0; }
+        .store-badge .store-badge-text {
+            display: flex;
+            flex-direction: column;
         }
+        .store-badge .store-badge-eyebrow {
+            font-size: 11px;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+        .store-badge .store-badge-title {
+            font-size: 19px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+        }
+
+        .hero-image { display: flex; justify-content: center; }
+        .hero-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 28px;
+            box-shadow: 0 28px 70px -24px rgba(15, 46, 41, 0.4);
+        }
+
+        /* ---- features ---- */
+        section.features { padding: 88px 0 24px; }
         .section-heading {
             text-align: center;
             max-width: 560px;
-            margin: 0 auto 40px;
+            margin: 0 auto 44px;
         }
         .section-heading h2 {
-            font-size: 30px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin: 0 0 10px;
         }
         .section-heading p {
             color: var(--text-secondary);
             font-size: 16px;
-            margin: 0;
+            margin: 0 auto;
         }
         .feature-grid {
             display: grid;
@@ -137,73 +220,98 @@
         .feature-card {
             background: var(--bg);
             padding: 28px;
-            border-radius: 18px;
+            border-radius: 20px;
             text-align: left;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .feature-card:hover { transform: translateY(-3px); }
         .feature-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
             background: var(--primary-soft);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
+            color: var(--primary-dark);
         }
         .feature-card.ai .feature-icon {
             background: var(--ai-soft);
+            color: var(--ai);
         }
         .feature-card h3 {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.1px;
             margin: 0 0 8px;
         }
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 14.5px;
             margin: 0;
+            max-width: none;
         }
+
+        /* ---- showcase ---- */
         section.showcase {
             background: var(--bg);
-            padding: 64px 0;
+            padding: 80px 0;
+            overflow: hidden;
         }
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 32px;
-            max-width: 700px;
-            margin: 0 auto;
+        .showcase-rail {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            padding: 4px 24px 20px;
+            margin: 0 calc(-1 * 24px);
+            scrollbar-width: thin;
+            scrollbar-color: var(--text-muted) transparent;
         }
-        .showcase-item {
-            text-align: center;
+        .showcase-rail::-webkit-scrollbar { height: 8px; }
+        .showcase-rail::-webkit-scrollbar-track { background: transparent; }
+        .showcase-rail::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 100px;
         }
-        .showcase-item img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px -24px rgba(23, 33, 31, 0.4);
-            margin-bottom: 16px;
+        .showcase-shot {
+            flex: 0 0 auto;
+            width: 220px;
+            scroll-snap-align: start;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 46px -22px rgba(15, 46, 41, 0.35);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .showcase-item h4 {
-            font-size: 15px;
-            font-weight: 600;
-            margin: 0;
-        }
+        .showcase-shot:hover { transform: translateY(-6px); }
+        .showcase-shot img { width: 100%; }
+
+        /* ---- cta ---- */
         section.cta {
-            padding: 64px 0 72px;
+            padding: 84px 0 88px;
             text-align: center;
         }
         section.cta h2 {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
             margin: 0 0 12px;
         }
         section.cta p {
             color: var(--text-secondary);
-            font-size: 16px;
+            font-size: 16.5px;
             max-width: 440px;
-            margin: 0 auto 24px;
+            margin: 0 auto 28px;
         }
+        .cta-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* ---- footer ---- */
         footer {
             border-top: 1px solid var(--border);
             padding: 32px 0;
@@ -220,25 +328,33 @@
             color: var(--primary);
             text-decoration: underline;
         }
+
+        /* ---- reveal-on-scroll: the page's one authored motion moment ---- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            html { scroll-behavior: auto; }
+        }
+
         @media (max-width: 760px) {
             .hero {
                 grid-template-columns: 1fr;
-                padding-top: 48px;
+                padding-top: 40px;
                 text-align: center;
             }
-            .hero-copy p.subtitle {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-copy h1 {
-                font-size: 34px;
-            }
-            .hero-image {
-                order: -1;
-            }
-            .hero-image img {
-                max-width: 260px;
-            }
+            .hero-copy p.subtitle { margin-left: auto; margin-right: auto; }
+            .hero-actions { justify-content: center; }
+            .hero-copy h1 { font-size: 36px; }
+            .hero-image { order: -1; margin-bottom: 8px; }
+            .hero-image img { max-width: 240px; }
+            section.features { padding-top: 64px; }
+            section.showcase { padding: 64px 0; }
+            .header-cta span { display: none; }
         }
     </style>
 </head>
@@ -250,73 +366,112 @@
             <img src="images/logo.svg" alt="Habiproof logo">
             Habiproof
         </a>
+        <a class="header-cta" href="https://apps.apple.com/app/id6797038152">
+            <span>Get the app</span> →
+        </a>
     </div>
 </header>
 
 <main>
     <section class="hero container">
-        <div class="hero-copy">
-            <span class="pill"><span class="dot"></span>AI-Powered Property Inspection</span>
-            <h1>Every property, fully documented.</h1>
-            <p class="subtitle">Inspect homes, document defects with AI-assisted suggestions, and generate clean, export-ready PDF reports in minutes.</p>
-            <span class="coming-soon">🚀 Coming soon to iOS &amp; Android</span>
+        <div class="hero-copy reveal">
+            <span class="live-badge"><span class="dot"></span>Now available on the App Store</span>
+            <h1>Every property, <span class="accent">fully documented.</span></h1>
+            <p class="subtitle">Inspect homes, document defects with AI-assisted suggestions, and generate clean, professional PDF reports in minutes, right from the site.</p>
+            <div class="hero-actions">
+                <a class="store-badge" href="https://apps.apple.com/app/id6797038152" aria-label="Download Habiproof on the App Store">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.03 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-1.996-.156-3.667 1.09-4.61 1.09z"/>
+                        <path d="M15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.817-.78.896-1.454 2.338-1.271 3.714 1.338.104 2.715-.688 3.558-1.7z"/>
+                    </svg>
+                    <span class="store-badge-text">
+                        <span class="store-badge-eyebrow">Download on the</span>
+                        <span class="store-badge-title">App Store</span>
+                    </span>
+                </a>
+                <span class="android-note">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 18l1-8h10l1 8M7 10l-2-4M17 10l2-4M9 22v-3M15 22v-3"/></svg>
+                    Android: coming soon
+                </span>
+            </div>
         </div>
-        <div class="hero-image">
-            <img src="images/screenshot-hero.png" alt="Habiproof home screen showing an inspection overview">
+        <div class="hero-image reveal">
+            <img src="images/habiproof-screens/hero.webp" alt="Habiproof property overview screen showing photos, rooms, and findings for a home inspection">
         </div>
     </section>
 
     <section class="features container">
-        <div class="section-heading">
+        <div class="section-heading reveal">
             <h2>Built for the way inspections actually happen</h2>
             <p>One calm workflow from first photo to finished report.</p>
         </div>
-        <div class="feature-grid">
+        <div class="feature-grid reveal">
             <div class="feature-card ai">
-                <div class="feature-icon">✨</div>
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19.4 9.4 13.8 11.2 12 17l-1.8-5.8L4.6 9.4l5.6-1.8L12 2z"/><path d="M19.5 15l.7 2.2 2.3.8-2.3.8-.7 2.2-.7-2.2-2.3-.8 2.3-.8.7-2.2z" opacity="0.7"/></svg>
+                </div>
                 <h3>Automated AI Audits</h3>
-                <p>Smart, AI-suggested checklist items and summary notes speed up every inspection.</p>
+                <p>AI-suggested checklist items, defects, and severity. Always reviewed and confirmed by you before anything is saved.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📷</div>
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>
+                </div>
                 <h3>Visual Defect Tracking</h3>
-                <p>Capture photos, categorize issues by room, and flag severity with color-coded status.</p>
+                <p>Capture photos, categorize issues by room, and flag severity with color-coded status. Evidence stays attached to every finding.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">✅</div>
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 9.5l1.8 1.8L13.5 8M8 15.5h8"/></svg>
+                </div>
                 <h3>Room-by-Room Checklists</h3>
-                <p>A practical checklist keeps every area covered — nothing gets missed.</p>
+                <p>A practical, guided checklist keeps every area covered, thorough and fast, so nothing gets missed.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📄</div>
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"/><path d="M14 3.5V8h4M9 13h6M9 16.5h6"/></svg>
+                </div>
                 <h3>Instant PDF Export</h3>
-                <p>Generate clean, structured PDF reports with cover photos and evidence attached.</p>
+                <p>Generate a clean, branded PDF report: cover photo, findings, and evidence, organized and ready to send.</p>
             </div>
         </div>
     </section>
 
     <section class="showcase">
         <div class="container">
-            <div class="section-heading">
+            <div class="section-heading reveal">
                 <h2>See it in action</h2>
+                <p>A closer look at the real app. Every screen shown here is live on the App Store today.</p>
             </div>
-            <div class="showcase-grid">
-                <div class="showcase-item">
-                    <img src="images/screenshot-property.png" alt="Property details screen with photos, rooms and findings connected from day one">
-                    <h4>Every property, fully documented</h4>
-                </div>
-                <div class="showcase-item">
-                    <img src="images/screenshot-report.png" alt="Report readiness screen bringing findings, notes and evidence together">
-                    <h4>From inspection to professional report</h4>
-                </div>
-            </div>
+        </div>
+        <div class="showcase-rail reveal">
+            <div class="showcase-shot"><img src="images/habiproof-screens/01-photos-to-report.webp" alt="Photos in, full report out: capture, review, export" loading="lazy"></div>
+            <div class="showcase-shot"><img src="images/habiproof-screens/02-ai-highlights.webp" alt="AI highlights what needs attention, always reviewed by you" loading="lazy"></div>
+            <div class="showcase-shot"><img src="images/habiproof-screens/03-professional-pdf.webp" alt="A PDF report you're proud to send" loading="lazy"></div>
+            <div class="showcase-shot"><img src="images/habiproof-screens/04-clear-evidence.webp" alt="Clear evidence, fewer disputes: photo-backed condition records" loading="lazy"></div>
+            <div class="showcase-shot"><img src="images/habiproof-screens/05-room-by-room.webp" alt="Room by room, nothing skipped" loading="lazy"></div>
+            <div class="showcase-shot"><img src="images/habiproof-screens/06-your-brand.webp" alt="Your logo, your signature, your report" loading="lazy"></div>
+            <div class="showcase-shot"><img src="images/habiproof-screens/07-less-paperwork.webp" alt="Less paperwork, more inspections" loading="lazy"></div>
         </div>
     </section>
 
     <section class="cta container">
-        <h2>Ready when you are.</h2>
-        <p>Habiproof is in final testing ahead of launch on the App Store and Google Play.</p>
-        <span class="coming-soon">🚀 Coming soon to iOS &amp; Android</span>
+        <div class="reveal">
+            <h2>Ready when you are.</h2>
+            <p>Habiproof is available now on the App Store. Android is coming soon.</p>
+            <div class="cta-actions">
+                <a class="store-badge" href="https://apps.apple.com/app/id6797038152" aria-label="Download Habiproof on the App Store">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.03 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-1.996-.156-3.667 1.09-4.61 1.09z"/>
+                        <path d="M15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.817-.78.896-1.454 2.338-1.271 3.714 1.338.104 2.715-.688 3.558-1.7z"/>
+                    </svg>
+                    <span class="store-badge-text">
+                        <span class="store-badge-eyebrow">Download on the</span>
+                        <span class="store-badge-title">App Store</span>
+                    </span>
+                </a>
+            </div>
+        </div>
     </section>
 </main>
 
@@ -329,6 +484,23 @@
         </p>
     </div>
 </footer>
+
+<script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var revealEls = document.querySelectorAll('.reveal');
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
+    }
+</script>
 
 </body>
 </html>
