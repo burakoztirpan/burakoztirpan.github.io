@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512">
+  <title>habiproof app icon master</title>
+  <desc>Full-bleed store-safe icon. Platform masks create the final corner shape.</desc>
+  <rect width="512" height="512" fill="#0F766E"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M144 392V120M144 246L256 162L368 246V392"/>
+    <path d="M216 323L251 358L318 285"/>
+  </g>
+</svg>
