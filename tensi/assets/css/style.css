@@ -1,0 +1,639 @@
+/* Tensi marketing site — design tokens mirror App/iOS/TensiTheme.swift 1:1
+   (surface/card/border/text/accent/hrvGood hexes, card/button radii, font
+   families) so this site reads as the same product as the app, not a
+   separate marketing skin. */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/Manrope-Variable.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --surface: #F7F4EF;
+  --card: #FFFDFA;
+  --border: #ECEBE7;
+  --text: #1C1C19;
+  --text-secondary: #544245;
+  --text-muted: #867275;
+  --accent: #6B1F35;
+  --accent-soft: #F7DCE0;
+  --hrv-good: #4E7A67;
+  --load-high: #C77E4A;
+  --card-radius: 20px;
+  --button-radius: 16px;
+  --chip-radius: 10px;
+  --max-width: 1120px;
+  --content-width: 720px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #131412;
+    --card: #1C1D1A;
+    --border: #343530;
+    --text: #F2F1ED;
+    --text-secondary: #C9C7C1;
+    --text-muted: #8E8D87;
+    --accent: #C6395F;
+    --accent-soft: #38252B;
+    --hrv-good: #7A9E8E;
+    --load-high: #C77E4A;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+h1, h2, h3, h4 {
+  font-family: "Manrope", -apple-system, sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+
+::selection { background: var(--accent); color: var(--card); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.label-caps {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ---------- Global background wash ----------
+   Same technique as View.tensiGlobalBackground(): a fixed-height wine
+   gradient band at the very top, fading to the plain surface color. */
+.tensi-wash {
+  position: relative;
+  overflow: hidden;
+}
+.tensi-wash::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 520px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 9%, transparent) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.tensi-wash > * { position: relative; z-index: 1; }
+
+/* ---------- Nav ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.site-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.3px;
+}
+.brand img { width: 30px; height: 30px; border-radius: 8px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  padding: 9px 18px;
+  border-radius: var(--button-radius);
+  background: var(--accent);
+  color: var(--card) !important;
+  font-weight: 600;
+  font-size: 14px;
+}
+.nav-menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: var(--button-radius);
+  font-weight: 600;
+  font-size: 15.5px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--accent); color: var(--card); }
+.btn-primary:hover { opacity: 0.88; }
+.btn-secondary {
+  background: var(--card);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--accent); }
+.btn-trial { background: var(--hrv-good); color: var(--card); }
+.btn-trial:hover { opacity: 0.88; }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 96px 0 72px;
+  text-align: center;
+}
+.hero-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  margin: 0 auto 28px;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  max-width: 780px;
+  margin: 0 auto;
+}
+.hero .accent-word { color: var(--accent); }
+.hero p.lede {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 22px auto 0;
+  line-height: 1.6;
+}
+.hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+.hero-note {
+  margin-top: 18px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.badge-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 44px;
+}
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.badge-pill svg { width: 14px; height: 14px; flex: none; color: var(--hrv-good); }
+
+/* ---------- Device frame placeholder ----------
+   Stand-in for a real screenshot/mockup (to be dropped in later) — styled
+   like the app's own card language rather than a generic gray box, so the
+   page still looks finished before real imagery arrives. */
+.device-frame {
+  margin: 56px auto 0;
+  max-width: 300px;
+  aspect-ratio: 9 / 18.5;
+  border-radius: 44px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 90% at 50% -10%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%),
+    var(--card);
+  padding: 14px;
+  position: relative;
+}
+.device-frame::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 32px;
+  border: 1px solid var(--border);
+}
+.device-frame .placeholder-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ---------- Sections ---------- */
+section { padding: 88px 0; }
+.section-head {
+  max-width: 620px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+}
+.section-head p {
+  margin-top: 14px;
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.section-alt { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* ---------- Feature grid ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px 24px;
+}
+.feature-card .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.feature-card .icon svg { width: 22px; height: 22px; }
+.feature-card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.feature-card p {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ---------- Privacy section ---------- */
+.privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.privacy-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+.privacy-item svg {
+  width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--hrv-good);
+}
+.privacy-item strong { display: block; font-size: 15px; margin-bottom: 3px; }
+.privacy-item span { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+
+/* ---------- Pricing ---------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 32px 28px;
+}
+.price-card.is-pro {
+  border-color: var(--accent);
+  position: relative;
+}
+.price-card .plan-name {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+}
+.price-card .plan-price {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 34px;
+  margin: 12px 0 2px;
+  font-variant-numeric: tabular-nums;
+}
+.price-card .plan-cycle { font-size: 13px; color: var(--text-muted); margin-bottom: 22px; display: block; }
+.price-list { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 10px; }
+.price-list li {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.price-list svg { width: 16px; height: 16px; flex: none; margin-top: 3px; color: var(--hrv-good); }
+.price-note { text-align: center; margin-top: 18px; font-size: 13px; color: var(--text-muted); }
+
+/* ---------- FAQ ---------- */
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--text);
+}
+.faq-question .plus {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+.faq-item[open] .faq-question .plus { transform: rotate(45deg); }
+.faq-answer {
+  padding: 0 24px 22px;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary { list-style: none; }
+
+/* ---------- CTA band ---------- */
+.cta-band {
+  text-align: center;
+  padding: 90px 0;
+}
+.cta-band h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); max-width: 560px; margin: 0 auto; }
+.cta-band p { margin-top: 14px; color: var(--text-secondary); font-size: 16px; }
+.cta-band .btn { margin-top: 30px; }
+
+/* ---------- Footer ---------- */
+footer.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 0 32px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding-bottom: 32px;
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-brand img { width: 26px; height: 26px; border-radius: 7px; }
+.footer-brand span { font-family: "Manrope", sans-serif; font-weight: 600; font-size: 15px; }
+.footer-tagline { margin-top: 10px; font-size: 13.5px; color: var(--text-muted); max-width: 260px; line-height: 1.6; }
+.footer-links {
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+.footer-col h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.footer-bottom a { color: var(--text-muted); }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ---------- Simple content pages (privacy/terms/contact) ---------- */
+.doc-wrap {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 64px 24px 100px;
+}
+.doc-wrap h1 { font-size: 2.1rem; margin-bottom: 8px; }
+.doc-updated { color: var(--text-muted); font-size: 13.5px; margin-bottom: 40px; }
+.doc-wrap h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.2rem;
+  margin: 40px 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.doc-wrap p, .doc-wrap li {
+  color: var(--text-secondary);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+.doc-wrap p { margin: 0 0 14px; }
+.doc-wrap ul, .doc-wrap ol { padding-left: 1.3rem; margin: 0 0 14px; }
+.doc-wrap li { margin-bottom: 6px; }
+.doc-wrap strong { color: var(--text); font-weight: 600; }
+.doc-wrap a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.doc-callout {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-size: 14.5px;
+  color: var(--text);
+}
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 14px;
+}
+.doc-table th, .doc-table td {
+  text-align: left;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-secondary);
+}
+.doc-table th { background: var(--card); font-weight: 600; color: var(--text); }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.back-link:hover { color: var(--accent); }
+
+/* ---------- Contact page (kept deliberately quiet) ---------- */
+.contact-card {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 44px 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+.contact-card img { width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 20px; }
+.contact-card h1 { font-size: 1.4rem; margin-bottom: 10px; }
+.contact-card p { color: var(--text-secondary); font-size: 14.5px; margin-bottom: 24px; line-height: 1.6; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .privacy-grid { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  /* absolute, not fixed: .site-nav's own backdrop-filter establishes a
+     containing block for fixed/absolute descendants in modern browsers, so
+     a `position: fixed` child here would size itself against the 68px nav
+     bar instead of the viewport. `absolute` matches that containing block
+     on purpose instead of fighting it. */
+  .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); flex-direction: column; align-items: flex-start; padding: 28px 24px; gap: 22px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: none; }
+  .nav-links.is-open { display: flex; }
+  .nav-menu-btn { display: flex; }
+  .nav-cta { margin-top: 6px; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  section { padding: 64px 0; }
+  .hero { padding: 64px 0 48px; }
+  .footer-links { gap: 32px; }
+}
