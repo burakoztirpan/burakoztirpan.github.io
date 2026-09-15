@@ -285,6 +285,7 @@ button { font-family: inherit; }
   margin: 56px auto 0;
   max-width: 300px;
   width: 100%;
+  height: auto;
   border-radius: 28px;
 }
 
@@ -292,17 +293,22 @@ button { font-family: inherit; }
 
 /* ---------- Screenshot strip ----------
    No .wrap ancestor here on purpose (the section is already edge-to-edge) —
-   the strip itself carries no horizontal padding/margin; the gutter comes
-   entirely from the first/last image's own margin below. An earlier version
-   used a negative margin sized to "escape" a .wrap that was never actually
-   there, which overflowed the viewport and threw the whole strip out of
-   alignment. */
+   padding on the strip itself gives a plain, uniform gutter instead of
+   trying to match .wrap's own inset with a computed margin.
+   justify-content: safe center is the fix for "stuck to the left": a flex
+   row defaults to flex-start, so on any viewport wide enough that all 7
+   images fit without needing to scroll, they bunched up on the left with
+   empty space on the right instead of sitting centered. `safe center`
+   centers the row when it fits, and only falls back to start-alignment
+   once content actually overflows and needs the scrollbar — never clips
+   the first item off-screen the way a plain `center` would. */
 .shots-strip {
   display: flex;
+  justify-content: safe center;
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 8px 0 12px;
+  padding: 8px 24px 12px;
   scrollbar-width: none;
 }
 .shots-strip::-webkit-scrollbar { display: none; }
@@ -314,8 +320,6 @@ button { font-family: inherit; }
   border: 1px solid var(--border);
   scroll-snap-align: start;
 }
-.shots-strip img:first-child { margin-left: max(24px, (100vw - var(--max-width)) / 2); }
-.shots-strip img:last-child { margin-right: max(24px, (100vw - var(--max-width)) / 2); }
 
 /* ---------- Sections ---------- */
 section { padding: 88px 0; }
