@@ -280,41 +280,37 @@ button { font-family: inherit; }
 }
 .badge-pill svg { width: 14px; height: 14px; flex: none; color: var(--hrv-good); }
 
-/* ---------- Device frame placeholder ----------
-   Stand-in for a real screenshot/mockup (to be dropped in later) — styled
-   like the app's own card language rather than a generic gray box, so the
-   page still looks finished before real imagery arrives. */
-.device-frame {
+/* ---------- Hero product shot ---------- */
+.hero-shot {
   margin: 56px auto 0;
   max-width: 300px;
-  aspect-ratio: 9 / 18.5;
-  border-radius: 44px;
-  border: 1px solid var(--border);
-  background:
-    radial-gradient(120% 90% at 50% -10%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%),
-    var(--card);
-  padding: 14px;
-  position: relative;
+  width: 100%;
+  border-radius: 28px;
 }
-.device-frame::before {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border-radius: 32px;
-  border: 1px solid var(--border);
-}
-.device-frame .placeholder-label {
-  position: absolute;
-  inset: 0;
+
+#screenshots { padding: 40px 0; }
+
+/* ---------- Screenshot strip ---------- */
+.shots-strip {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px;
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 8px 24px 12px;
+  margin: 0 calc(-1 * max(24px, (100vw - var(--max-width)) / 2 + 24px));
+  scrollbar-width: none;
 }
+.shots-strip::-webkit-scrollbar { display: none; }
+.shots-strip img {
+  flex: none;
+  width: 180px;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  scroll-snap-align: start;
+}
+.shots-strip img:first-child { margin-left: max(24px, (100vw - var(--max-width)) / 2); }
+.shots-strip img:last-child { margin-right: max(24px, (100vw - var(--max-width)) / 2); }
 
 /* ---------- Sections ---------- */
 section { padding: 88px 0; }
