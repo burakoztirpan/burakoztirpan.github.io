@@ -32,27 +32,28 @@
 <div class="doc-wrap">
   <a class="back-link" href="index.html">← Back to Tensi</a>
   <h1>Privacy Policy</h1>
-  <div class="doc-updated">Effective date: September 15, 2026</div>
+  <div class="doc-updated">Effective date: September 19, 2026</div>
 
-  <p>This Privacy Policy explains how the Tensi mobile application ("the App"), developed by Burak Öztırpan ("we", "us", "our"), handles information. The short version: <strong>the App does not collect, store, or transmit any personal data to us.</strong> Every correlation Tensi finds is computed on your device, and stays there.</p>
+  <p>This Privacy Policy explains how the Tensi mobile application ("the App"), developed by Burak Öztırpan ("we", "us", "our"), handles information. The short version: <strong>we do not operate any server, and we never receive, collect, or store your personal data.</strong> Tensi analyses your data on your iPhone. The only information that leaves your device is location coordinates sent to Apple's own weather and place-name services, described in Sections 4 and 5.</p>
 
   <h2>1. Information We Do Not Collect</h2>
   <p>Tensi does not require you to create an account, does not ask for your name, email address, or any other personal identifier, and does not include analytics, advertising, or tracking software of any kind. We do not operate a server that receives data from the App, and we have no way to identify you as a user or see what patterns Tensi has found for you.</p>
 
   <h2>2. Health Data</h2>
-  <p>With your permission, Tensi reads Health data — including heart rate variability (HRV), resting heart rate, sleep, activity, respiratory rate and related metrics — directly from Apple HealthKit, on your device. This data is used only to compute correlations shown to you inside the App. It is never uploaded, never leaves your device, and Tensi never writes data back to Health.</p>
+  <p>With your permission, Tensi reads the following data from Apple HealthKit, read-only: heart rate variability (SDNN, and RMSSD calculated from your heartbeat series), resting heart rate, sleep analysis, step count, active and basal energy burned, respiratory rate, time in daylight, environmental audio exposure, mindful sessions, dietary water and caffeine, VO&#8322; max, body mass, lean body mass, body fat percentage, and sleeping wrist temperature. Tensi never writes to Health.</p>
+  <p>This data is used only to compute the patterns and summaries shown to you in the App. Daily summaries are stored in the App's local database on your device. If you use the Apple Watch app, a summary of recent history is sent from your iPhone to your paired Apple Watch. Health data is never uploaded to us, never shared with third parties, never used for advertising, marketing, or data mining, and never stored in iCloud.</p>
 
   <h2>3. Calendar Data</h2>
-  <p>If you grant Calendar access, Tensi reads meeting <strong>counts and durations</strong> only, to notice patterns between busy stretches and how you feel. Event titles, notes, locations, and attendee names are never read, never stored, and never leave your device.</p>
+  <p>If you grant Calendar access, Tensi reads each event's start and end time, duration, whether it is all-day or recurring, the number of attendees, whether you are the organizer, whether the event has a location (including the coordinates of that location, which are used to recognize recurring places), and the names of your calendars so you can label them. Event titles, notes, and attendee names or email addresses are never read. This data is analysed on your iPhone to notice patterns between busy stretches and how you feel.</p>
 
   <h2>4. Location Data</h2>
-  <p>If you grant Location access, Tensi uses your location entirely on-device to notice which recurring places correlate with how you feel. Your location is never shown to you as a street address, never reverse-geocoded to a human-readable place by us, and never transmitted anywhere.</p>
+  <p>If you grant Location access ("While Using" or "Always"), Tensi records significant location changes and visits (arrival and departure times) and groups them into places you visit regularly. These places are stored on your device only. To show a readable name for a place, Tensi sends its coordinates to Apple's geocoding service (Core Location), and stores the resulting street or neighborhood label on your device so it can be shown to you. You can rename any place in the App. Tensi has no server and never receives your location.</p>
 
   <h2>5. Weather Data</h2>
-  <p>Tensi uses Apple's WeatherKit to fetch weather conditions for correlation purposes. This requires sending your approximate location to Apple's weather service to retrieve a forecast — the same way Apple's own Weather app works. Apple's handling of that request is governed by Apple's own privacy practices, not ours; we never see or store the data ourselves.</p>
+  <p>Tensi uses Apple's WeatherKit to fetch weather conditions for correlation purposes. This requires sending the coordinates of your regular places to Apple's weather service to retrieve weather history and forecasts, in the same way Apple's own Weather app works. Apple's handling of that request is governed by Apple's own privacy practices, not ours; we never see or store the data ourselves. Weather data is provided by Apple Weather.</p>
 
   <h2>6. Apple Watch &amp; Widgets</h2>
-  <p>Tensi's iPhone app, Apple Watch app, and home/lock-screen widgets share data locally through Apple's App Group storage mechanism — a private, on-device container used to keep your Watch and widgets in sync with the iPhone app. This data never leaves the App Group and is never transmitted off your device or paired devices.</p>
+  <p>Tensi's iPhone app, Apple Watch app, and home/lock-screen widgets keep each other in sync on your own devices. The iPhone sends a summary (up to the most recent 200 days of daily features, health summaries, and detected patterns) to your paired Apple Watch through Apple's WatchConnectivity framework, and widgets read a small snapshot from a private App Group container on the same device. This data is never transmitted to us or to any other party.</p>
 
   <h2>7. Subscriptions &amp; Purchases</h2>
   <p>Tensi Pro is offered as an auto-renewable subscription, purchased and managed through Apple's StoreKit and your Apple ID. Payment details are handled entirely by Apple — we never see or store your card information. Apple may share limited, anonymized transaction information with us (such as whether a subscription is active) as part of standard App Store reporting; this is governed by Apple's own privacy policy.</p>
@@ -61,14 +62,14 @@
   <p>If you enable optional local notifications (for example, a weekly report reminder), they are scheduled and delivered entirely by iOS on your device, using data already stored in the App. No notification data is sent to or processed by us.</p>
 
   <h2>9. Third-Party Services</h2>
-  <p>Tensi does not integrate any third-party analytics, advertising, or crash-reporting SDKs. The only outside service the App communicates with is Apple's own WeatherKit (see Section 5) and Apple's own StoreKit for purchases (see Section 7) — both first-party Apple frameworks, not third-party trackers.</p>
+  <p>Tensi does not integrate any third-party analytics, advertising, or crash-reporting SDKs, and does not share your data with any third party. The only outside services the App communicates with are Apple's own WeatherKit (Section 5), Apple's geocoding service (Section 4), and Apple's StoreKit for purchases (Section 7). These are first-party Apple services, not third-party trackers.</p>
 
   <h2>10. Children's Privacy</h2>
   <p>Because the App collects no personal data from anyone, it does not knowingly collect personal data from children. Tensi is rated 4+ on the App Store.</p>
 
-  <h2>11. Your Rights</h2>
+  <h2>11. Data Retention, Deletion &amp; Your Choices</h2>
   <div class="doc-callout">
-    Since we never receive or store your personal data on any server, there is nothing for us to access, export, correct, or delete on your behalf. You are always in full control: revoking a permission in iOS Settings, clearing the App's data, or uninstalling it removes everything immediately, on your device.
+    Tensi keeps your data on your device until you delete it. You can erase everything the App has stored (health summaries, calendar-derived data, places and place names, weather data, detected patterns, journal notes, and the widget and Apple Watch copies) at any time with <strong>Settings &rarr; Delete All My Data</strong> in the App. You can withdraw any permission at any moment in the App's Permissions screen or in iOS Settings, and the App keeps working with the data you still allow. Uninstalling the App removes its data from your device. Because we never receive or store your personal data, there is nothing on our side to access, export, or delete on your behalf.
   </div>
 
   <h2>12. Changes to This Policy</h2>
