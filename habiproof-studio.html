@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Habiproof Studio</title>
+<link rel="icon" href="images/habiproof-icon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --primary:#0F766E; --primary-dark:#115E59; --primary-soft:#E7F3F1; --bg:#F2F2F7; --surface:#FFFFFF;
+          --text:#17211F; --text-2:#4B5A56; --muted:#7C8A86; --border:#E4E8E6; --ok:#15803D; --err:#DC2626; --warn:#D97706; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+  header { background:var(--surface); border-bottom:1px solid var(--border); }
+  .wrap { max-width:960px; margin:0 auto; padding:0 16px; }
+  .bar { display:flex; align-items:center; gap:12px; height:64px; }
+  .bar svg { width:32px; height:32px; }
+  .bar b { font-size:18px; letter-spacing:-.01em; } .bar span { color:var(--muted); font-size:14px; }
+  h2 { font-size:18px; margin:0 0 4px; } p.sub { margin:0 0 16px; color:var(--text-2); font-size:14px; }
+  section { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; margin:24px 0; }
+  .row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .avatar { width:48px; height:48px; border-radius:50%; background:var(--primary-soft); object-fit:cover; }
+  button { font:600 14px Inter,sans-serif; height:44px; padding:0 18px; border-radius:12px; border:1px solid var(--primary); background:var(--primary); color:#fff; cursor:pointer; }
+  button.secondary { background:var(--surface); color:var(--primary); }
+  button:disabled { opacity:.5; cursor:default; }
+  .chip { display:inline-block; font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--primary-soft); color:var(--primary-dark); margin:2px 4px 2px 0; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+  .card { border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .card img, .card video { width:100%; aspect-ratio:9/16; object-fit:cover; background:#000; display:block; }
+  .card .body { padding:12px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card .hook { font-weight:600; font-size:14px; } .meta { font-size:12px; color:var(--muted); }
+  .status { font-size:12px; font-weight:600; } .s-ok { color:var(--ok); } .s-err { color:var(--err); } .s-warn { color:var(--warn); }
+  .notice { padding:12px 16px; border-radius:12px; background:#FEF3C7; color:#78350F; font-size:14px; display:none; }
+  table { width:100%; border-collapse:collapse; font-size:14px; } td, th { text-align:left; padding:8px; border-bottom:1px solid var(--border); }
+  footer { color:var(--muted); font-size:13px; padding:8px 0 40px; } footer a { color:var(--primary); margin-right:16px; }
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <svg viewBox="0 0 64 64" fill="none" stroke="#0F766E" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 52V12M16 30L32 18L48 30V52"/><path d="M25 40L30 45L40 34"/></svg>
+  <b>Habiproof Studio</b><span>Publishing console for Habiproof's own TikTok account</span>
+</div></header>
+
+<main class="wrap">
+  <div class="notice" id="agent">Can't reach the Habiproof Studio agent on this computer. If your browser asked to allow access to devices on your local network, choose <b>Allow</b> and reload. Otherwise start the agent and reload.</div>
+
+  <section id="account">
+    <h2>1 · TikTok account</h2>
+    <p class="sub">Sign in with TikTok (Login Kit) so Studio can send approved videos to your TikTok inbox as drafts. You review and post each one yourself inside TikTok.</p>
+    <div class="row" id="acct-row"><button id="connect">Connect TikTok</button></div>
+    <p class="meta" style="margin-top:12px">Permissions requested: <span id="scopes"></span></p>
+  </section>
+
+  <section>
+    <h2>2 · Approved videos</h2>
+    <p class="sub">Short educational videos about new-build snagging, approved by the Habiproof team. <b>Send to TikTok</b> uploads the video to your TikTok inbox (Content Posting API, <code>video.upload</code>). Nothing is posted until you open the draft in TikTok and tap Post.</p>
+    <div class="grid" id="posts"></div>
+  </section>
+
+  <section>
+    <h2>3 · Recent TikTok videos</h2>
+    <p class="sub">Your latest public videos and their basic stats (<code>video.list</code>), used to measure which tips help home buyers most.</p>
+    <div id="videos" class="meta">Connect TikTok to see your videos.</div>
+  </section>
+
+  <footer>
+    <a href="/habiproof">Habiproof</a><a href="/habiproof-terms-and-conditions">Terms of Service &amp; Privacy Policy</a><a href="/habiproof-support">Support</a>
+    <div style="margin-top:8px">Habiproof Studio only accesses the TikTok account you connect. Tokens are stored encrypted on the Habiproof team's own computer and are never shared. Disconnect at any time below or in TikTok settings.</div>
+    <div style="margin-top:12px"><button class="secondary" id="disconnect" style="height:36px">Disconnect TikTok</button></div>
+  </footer>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8787/console';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+async function api(path, body) {
+  const opts = { targetAddressSpace: 'loopback' };   // Chrome Local Network Access hint (ignored elsewhere)
+  const r = await fetch(API + path, body === undefined ? opts : { ...opts, method: 'POST', headers: { 'content-type': 'application/json', 'x-habiproof-studio': '1' }, body: JSON.stringify(body) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+
+async function finishLogin() {
+  const u = new URL(location.href);
+  const code = u.searchParams.get('code'), state = u.searchParams.get('state'), error = u.searchParams.get('error');
+  if (!code && !error) return;
+  history.replaceState(null, '', location.pathname);   // keep the code out of history
+  if (error) return alert(`TikTok login was cancelled: ${u.searchParams.get('error_description') || error}`);
+  try { await api('/exchange', { code, state }); } catch (e) { alert(e.message); }
+}
+
+async function renderAccount() {
+  const s = await api('/status');
+  $('scopes').innerHTML = s.scopes.map((x) => `<span class="chip">${esc(x)}</span>`).join('');
+  const row = $('acct-row');
+  if (!s.connected) { row.innerHTML = '<button id="connect">Connect TikTok</button>'; $('connect').onclick = connect; $('disconnect').style.display = 'none'; return false; }
+  const u = s.user || {};
+  row.innerHTML = `<img class="avatar" src="${esc(u.avatar_url)}" alt=""><div><b>${esc(u.display_name || 'Connected')}</b><div class="meta">Connected · scopes: ${esc(s.scope)}</div></div>`;
+  $('disconnect').style.display = '';
+  return true;
+}
+
+async function connect() { const { url } = await api('/auth-url', {}); location.href = url; }
+
+const STATUS = { 'succeeded:SEND_TO_USER_INBOX': ['In your TikTok inbox — open TikTok to post', 's-ok'], 'succeeded:PUBLISH_COMPLETE': ['Posted', 's-ok'],
+  'in_progress:': ['Uploading…', 's-warn'], 'failed:': ['Failed — see Studio logs', 's-err'] };
+function statusLine(p) {
+  if (!p.tiktok) return p.status === 'approved' ? ['Approved · ready to send', 'meta'] : [p.status.replace('_', ' '), 'meta'];
+  return STATUS[p.tiktok] || STATUS[p.tiktok.split(':')[0] + ':'] || [p.tiktok, 'meta'];
+}
+
+async function renderPosts(connected) {
+  const posts = await api('/posts');
+  $('posts').innerHTML = posts.map((p) => {
+    const [label, cls] = statusLine(p);
+    return `<div class="card"><video src="${API}/media/${p.id}/video.mp4" poster="${API}/media/${p.id}/cover.png" controls preload="none" playsinline></video>
+      <div class="body"><div class="hook">${esc(p.hook)}</div><div class="meta">${esc(p.planned_date)} · ${esc(p.hashtags.join(' '))}</div>
+      <div class="status ${cls}" id="st-${p.id}">${esc(label)}</div>
+      ${p.status === 'approved' && !p.tiktok ? `<button data-send="${p.id}" ${connected ? '' : 'disabled title="Connect TikTok first"'}>Send to TikTok</button>` : ''}
+      ${p.tiktok ? `<button class="secondary" data-check="${p.id}">Check status</button>` : ''}</div></div>`;
+  }).join('') || '<p class="meta">No approved videos yet.</p>';
+  document.querySelectorAll('[data-send]').forEach((b) => b.onclick = async () => {
+    b.disabled = true; b.textContent = 'Sending…';
+    try { await api('/send', { post_id: Number(b.dataset.send) }); await pollStatus(Number(b.dataset.send)); } catch (e) { alert(e.message); }
+    renderPosts(connected);
+  });
+  document.querySelectorAll('[data-check]').forEach((b) => b.onclick = () => pollStatus(Number(b.dataset.check)).then(() => renderPosts(connected)));
+}
+
+async function pollStatus(id) {
+  for (let i = 0; i < 20; i++) {
+    const s = await api('/upload-status', { post_id: id }).catch((e) => ({ status: 'ERROR', fail_reason: e.message }));
+    $(`st-${id}`).textContent = s.status === 'SEND_TO_USER_INBOX' ? 'In your TikTok inbox — open TikTok to post' : `TikTok status: ${s.status}${s.fail_reason ? ` (${s.fail_reason})` : ''}`;
+    if (['SEND_TO_USER_INBOX', 'PUBLISH_COMPLETE', 'FAILED', 'ERROR', 'not_sent'].includes(s.status)) return;
+    await new Promise((r) => setTimeout(r, 3000));
+  }
+}
+
+async function renderVideos() {
+  const d = await api('/videos').catch((e) => ({ error: e.message }));
+  if (d.error) return $('videos').textContent = d.error;
+  const v = d.videos || [];
+  $('videos').innerHTML = v.length ? `<table><tr><th>Video</th><th>Posted</th><th>Views</th><th>Likes</th><th>Comments</th><th>Shares</th></tr>${v.map((x) =>
+    `<tr><td><a href="${esc(x.share_url)}" target="_blank" rel="noopener">${esc((x.title || x.video_description || x.id).slice(0, 60))}</a></td><td>${new Date(x.create_time * 1000).toLocaleDateString()}</td><td>${x.view_count ?? '–'}</td><td>${x.like_count ?? '–'}</td><td>${x.comment_count ?? '–'}</td><td>${x.share_count ?? '–'}</td></tr>`).join('')}</table>` : 'No public videos yet.';
+}
+
+$('disconnect').onclick = async () => { if (confirm('Disconnect TikTok from Habiproof Studio?')) { await api('/disconnect', {}); location.reload(); } };
+
+(async () => {
+  try {
+    await finishLogin();
+    const connected = await renderAccount();
+    await renderPosts(connected);
+    if (connected) await renderVideos();
+  } catch (e) {
+    $('agent').style.display = 'block';
+    $('connect').onclick = () => alert('Start Habiproof Studio on this computer first.');
+  }
+})();
+</script>
+</body>
+</html>
