@@ -58,7 +58,7 @@
     <div class="grid" id="posts"></div>
   </section>
 
-  <section>
+  <section id="videos-section" style="display:none">
     <h2>3 · Recent TikTok videos</h2>
     <p class="sub">Your latest public videos and their basic stats (<code>video.list</code>), used to measure which tips help home buyers most.</p>
     <div id="videos" class="meta">Connect TikTok to see your videos.</div>
@@ -94,6 +94,8 @@ async function finishLogin() {
 
 async function renderAccount() {
   const s = await api('/status');
+  window.SCOPES = s.scopes;
+  if (s.scopes.includes('video.list')) $('videos-section').style.display = '';
   $('scopes').innerHTML = s.scopes.map((x) => `<span class="chip">${esc(x)}</span>`).join('');
   const row = $('acct-row');
   if (!s.connected) { row.innerHTML = '<button id="connect">Connect TikTok</button>'; $('connect').onclick = connect; $('disconnect').style.display = 'none'; return false; }
@@ -154,7 +156,7 @@ $('disconnect').onclick = async () => { if (confirm('Disconnect TikTok from Habi
     await finishLogin();
     const connected = await renderAccount();
     await renderPosts(connected);
-    if (connected) await renderVideos();
+    if (connected && window.SCOPES.includes('video.list')) await renderVideos();
   } catch (e) {
     $('agent').style.display = 'block';
     $('connect').onclick = () => alert('Start Habiproof Studio on this computer first.');
