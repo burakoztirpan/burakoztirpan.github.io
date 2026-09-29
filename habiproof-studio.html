@@ -72,7 +72,11 @@
 </main>
 
 <script>
-const API = 'http://127.0.0.1:8787/console';
+// One return page serves every local studio instance: the OAuth state carries the instance port (e.g. "8789.<hex>").
+const PORTS = ['8787', '8789', '8790', '8791'];
+const statePort = (new URL(location.href).searchParams.get('state') || '').split('.')[0];
+const PORT = PORTS.includes(statePort) ? statePort : (new URL(location.href).searchParams.get('port') || '8787');
+const API = `http://127.0.0.1:${PORTS.includes(PORT) ? PORT : '8787'}/console`;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 async function api(path, body) {
