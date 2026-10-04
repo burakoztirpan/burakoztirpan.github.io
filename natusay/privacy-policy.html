@@ -87,18 +87,23 @@
             <tr><td>The photo you captured or chose (downscaled)</td><td>Google Gemini API</td><td>To recognize the living thing or object and invent its character.</td></tr>
             <tr><td>Chat text: the transcribed words, a few recent messages and a short summary</td><td>Google Gemini API</td><td>To write the character's reply.</td></tr>
             <tr><td>A short text describing how the character should look (not the photo)</td><td>fal.ai</td><td>To draw the character's portrait.</td></tr>
+            <tr><td>A photo of your surroundings, when you use the nature hint mode (downscaled)</td><td>Google Gemini API</td><td>To suggest what might live there and where to look.</td></tr>
+            <tr><td>A daily quest request: the names of the quest categories and the titles of the last few quests. No personal data</td><td>Google Gemini API</td><td>To write one new daily quest.</td></tr>
+            <tr><td>A friend's text (species, facts, greeting, suggested questions), when you change the app language</td><td>Google Gemini API</td><td>To translate it into the new language.</td></tr>
           </tbody>
         </table>
       </div>
       <p>The app does not add your name, email, location or device identifiers to these requests. Like any internet request, the receiving service sees an IP address.</p>
-      <p>Requests may pass through a relay server we operate on Google Cloud. It checks that the request comes from the genuine app and does not store the content of requests.</p>
+      <p>Requests pass through a relay server we operate on Google Cloud (Firebase). It checks that the request comes from the genuine app, using Firebase App Check and Apple's App Attest, and does not store the content of requests. It only keeps a daily request count to cap costs. For this check, the app sends a device attestation token to Google and Apple; it contains no personal information.</p>
       <p>We use the providers' paid, commercial API terms. Under those terms the providers process the data to answer the request and may keep it for a limited period for security and abuse monitoring. Their own policies apply to that processing.</p>
 
       <h2 id="camera">Camera and radar</h2>
       <p>The camera is used only inside the app to take a photo. In radar mode the live camera image is analyzed on the device to notice that something interesting is near, and it is not saved or sent. Only the photo that is actually captured is sent for recognition, as described above. Photos chosen from the library use Apple's photo picker, so the app only receives the photos you pick.</p>
 
       <h2 id="voice">Microphone and speech</h2>
+      <p>The app does not add your name, email, location or device identifiers to any of these requests.</p>
       <p>Children talk by holding a button. Speech is turned into text by Apple's iOS speech recognition. Depending on the device and language, that can happen on the device or on Apple's servers, under Apple's policy. The app does not record or store audio. Only the resulting text is used, as described above.</p>
+      <p>In listening mode the microphone is analyzed on the device by Apple's sound classification to notice nature sounds such as birds or insects. The sound is not recorded, stored or sent anywhere. Only the result, for example “a bird”, is kept in memory while the screen is open.</p>
 
       <h2 id="notifications">Notifications</h2>
       <p>A daily reminder is available in the Parent Area and is off by default. It is a local notification scheduled on the device. We run no push notification servers.</p>
