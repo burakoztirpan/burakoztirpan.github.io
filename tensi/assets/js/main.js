@@ -16,3 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Hairline under the sticky nav once the page has scrolled.
+const nav = document.querySelector(".site-nav");
+if (nav) {
+  const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
