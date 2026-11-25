@@ -171,7 +171,7 @@ section { padding: clamp(72px, 10vw, 128px) 0; }
 .gallery { padding: 0 0 clamp(48px, 6vw, 80px); }
 .shots-strip {
   display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
-  padding: 10px max(20px, calc((100vw - var(--wrap)) / 2)) 30px;
+  padding: 10px 20px 30px;
   scrollbar-width: thin; scrollbar-color: var(--chip) transparent;
 }
 .shots-strip img { flex: none; width: clamp(210px, 23vw, 270px); border-radius: 26px; scroll-snap-align: center; box-shadow: var(--shadow); }

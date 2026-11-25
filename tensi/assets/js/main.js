@@ -24,3 +24,7 @@ if (nav) {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 }
+
+// Start the screenshot strip scrolled to its middle so it sits centred on the page.
+const strip = document.querySelector('.shots-strip');
+if (strip) addEventListener('load', () => { strip.scrollLeft = (strip.scrollWidth - strip.clientWidth) / 2; });
